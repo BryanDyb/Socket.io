@@ -1,14 +1,19 @@
 var express = require('express');
-var socket = require('socket.io');
-
 var app = express();
-var server = app.listen(4000, function(){
-    console.log('Servidor corriendo en http://localhost:4000');
+var server = app.listen(4000, "0.0.0.0", function(){
+    console.log('Servidor corriendo en http://0.0.0.0:4000');
 });
 
 app.use(express.static('public'));
 
-var io = socket(server);
+// habilitar socket.io con CORS
+var socketIO = require('socket.io');
+var io = socketIO(server, {
+    cors: {
+        origin: "*",         // 🔹 en producción cambia "*" por tu dominio o IP pública
+        methods: ["GET", "POST"]
+    }
+});
 
 io.on('connection', function(socket){
     console.log('Hay una conexion', socket.id);
