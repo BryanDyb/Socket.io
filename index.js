@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var server = app.listen(4000, "0.0.0.0", function(){
-    console.log('Servidor corriendo en http://0.0.0.0:4000');
+    console.log('Servidor corriendo en http://18.219.84.6:4000');
 });
 
 app.use(express.static('public'));
